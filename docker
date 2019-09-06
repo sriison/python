@@ -1,0 +1,62 @@
+!/bin/bash
+
+repo=sriison
+time=`date +%Y%m%d%H%M%S`
+tag=$repo:$time
+latest=$image:latest
+
+sudo docker build -t $repo/$tag .
+docker push $repo/$tag
+latest=$repo:latest
+docker tag $repo/$tag $repo/$repo:latest
+docker images
+docker push $repo/$latest
+
+docker rmi $repo/$tag
+docker rmi -f $repo/$latest
+
+--------------------------------------------------
+git hash
+--------------------------------------------------
+
+repo=sriison
+version=`git log -1 --format=%h`
+tag=$repo:$version
+latest=$image:latest
+
+sudo docker build -t $repo/$tag .
+docker push $repo/$tag
+latest=$repo:latest
+docker tag $repo/$tag $repo/$repo:latest
+docker images
+docker push $repo/$latest
+
+docker rmi $repo/$tag
+docker rmi -f $repo/$latest
+
+
+
+image="sriison"
+
+#get timestamp for the tag
+timestamp=$(date +%Y%m%d%H%M%S)
+
+tag=$image:$timestamp
+latest=$image:latest
+
+#build image
+sudo docker build -t sriison/$tag .
+docker push $image/$tag .
+docker tag sriison/sriison:20190906110726 $image/$image
+docker push $image/$tag
+docker push $image/$image
+
+
+
+#push to dockerhub
+sudo docker login
+#sudo docker login -u username -p password
+sudo docker push $image
+
+#remove dangling images
+sudo docker system prune -f
