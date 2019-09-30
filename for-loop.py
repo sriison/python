@@ -14,3 +14,16 @@ for num in mylist:
 
 print(f'total sum = {list_sum}')
 
+
+name = "srini"
+for letter in name:
+    if letter == 'i':
+        continue
+    print(letter)
+
+
+for letter in name:
+    if letter == 'i':
+        break
+    print(letter)
+

@@ -22,6 +22,6 @@ with open("file.txt",mode='r') as f:
 with open("file.txt",mode='a') as f:
 	f.write('\nfour on forth')
 	
-with open("sdkjdsk.txt",mode='w') as f:
+with open("srini1.txt",mode='w') as f:
 	f.write('i created this file')
 
